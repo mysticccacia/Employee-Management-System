@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+*{
+    color: white;
+}
+
+html,body{
+    background-color: #111; 
+    /* color: white;  */
+}
+
+#tasklist::-webkit-scrollbar{
+    display: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.animate-text {
+  display: flex;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.word {
+  transform: translateY(100%);
+  opacity: 0;
+  animation: riseUp 0.5s ease forwards;
+}
+
+.delay-0 { animation-delay: 0s; }
+.delay-1 { animation-delay: 0.7s; }
+.delay-2 { animation-delay: 1.4s; }
+
+@keyframes riseUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
