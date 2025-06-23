@@ -3,14 +3,27 @@ import Login from "./components/Auth/Login";
 import EmployeeDashboard from "./components/Dashboard/EmployeeDashboard";
 import AdminDashboard from "./components/Dashboard/AdminDashboard";
 import { AuthContext } from "./context/AuthContext";
-import { getLocalStorage } from "./utils/localStorage";
+import { getLocalStorage ,setLocalStorage} from "./utils/localStorage";
 
 function App() {
+
+  useEffect(() => {
+  const hasEmployees = localStorage.getItem('employees');
+  const hasAdmin = localStorage.getItem('admin');
+
+  if (!hasEmployees || !hasAdmin) {
+    setLocalStorage();
+  }
+}, []);
+
   const [user, setuser] = useState(null);
   const [loggedInUserData, setloggedInUserData] = useState(null);
   const { userData } = useContext(AuthContext); // ✅ From context
 
   const isLoading = !userData?.employees?.length;
+
+ 
+
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("loggedInUser");
@@ -20,6 +33,9 @@ function App() {
       setloggedInUserData(parsed.data);
     }
   }, []);
+
+  
+
 
   const HandleLogin = (email, password) => {
     const { employees, admin } = getLocalStorage();
